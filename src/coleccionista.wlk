@@ -66,9 +66,42 @@
 
 // PUNTO 1: COLECCIONES
 object coleccionista {
+	var elementos=#{}
+	//var elementos =#{soldadoDePlomo,muniecoHeman}
 	
-	//TODO: Completar la implementacion de este objeto		
-
+	// punto 1
+	method agregarElemento(unElemento){
+		elementos.add(unElemento)
+	}
+	
+	method quitarElemento(unElemento){
+		elementos.remove(unElemento)
+	}
+	
+	method objetosFragiles()=
+		elementos.filter({elem=>elem.esFragil()})
+		
+	method objetoFragilMasCaro()=
+		self.objetosFragiles().max({elem=>elem.valor()})
+		
+	method valorEnObjetosFragiles()=
+		self.objetosFragiles().sum({elem=>elem.valor()})
+		
+	method filtrarPorCategoria(unaCategoria)=
+		elementos.filter({elem=>elem.categoria()==unaCategoria})
+		
+	method valorEnCategoria(unaCategoria)=
+		self.filtrarPorCategoria(unaCategoria).sum({elem=>elem.valor()})
+		
+	method existeElementoDe(unaCategoria)=
+	elementos.any({elem=>elem.categoria()==unaCategoria})
+	
+	method categorias()=
+	elementos.map({elem=>elem.categoria()}).asSet()
+	
+	method todosValiosos()=
+	elementos.all({elem=>elem.valor()>600})
+ 
 }
 
 
@@ -108,8 +141,43 @@ object musica {
 
 // PUNTO 2: POLIMORFISMO. 
 object guitarraElectrica {
+	var estuche=estucheflexible
+	var microfono=diMarzio
+	
+	method esFragil() = estuche.fragilidad()
+	method valor() =10000 + microfono.valor()
+	method categoria() = musica
+	method cambioDeEstuche(unEstuche){
+	estuche=unEstuche
+	}
+	method cambioDeMicrofono(mic){
+	microfono = mic
+	}
    //TODO Completar la implementacion de este objeto
 }
 
-//TODO: agregar los objetos que falten! Si no agregaste ninguno repensá tu solución; pista: el punto se llama "POLIMORFISMO" 
 
+
+
+//TODO: agregar los objetos que falten! Si no agregaste ninguno repensá tu solución; pista: el punto se llama "POLIMORFISMO" 
+object diMarzio{
+	
+	method valor()=800
+}
+
+object gibson{
+	method valor()=1000
+}
+
+object estucheRigido{
+	
+	method fragilidad()=false
+}
+
+object estucheflexible{
+	
+	method fragilidad()=true
+	}
+	
+	
+	
