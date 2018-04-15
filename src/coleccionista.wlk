@@ -1,3 +1,6 @@
+//CORRECCION: NOTA: MB
+//CORRECCION: No hubo necesidad de agregar comentarios en el código.
+
 /*     Parcialito: Coleccionista
  * 	
  *   Se trata de una aplicación que sirve para que una persona, dueña de una galería de elementos coleccionables
